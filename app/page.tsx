@@ -46,11 +46,10 @@ export default function Home() {
       }
 
       const reg = await navigator.serviceWorker.ready;
+      const VAPID_PUBLIC_KEY = 'BDcvlRyKUuzzJBXN8AsIpJOCPT_1dZtQ9qayHzWrf0ADBUSihCaNwRJnjhiPlVmf6q37JnTwyVGcpY_b8RuM4Zo';
       const sub = await reg.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
-        ),
+        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
       });
 
       const res = await fetch('/api/subscribe', {
