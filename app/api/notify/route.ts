@@ -14,6 +14,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  // Only send between 8 AM and 11 PM IST (UTC+5:30)
+  const istHour = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })).getHours();
+  if (istHour < 8 || istHour >= 23) {
+    return NextResponse.json({ skipped: true, reason: 'Outside active hours (8AM–11PM IST)' });
+  }
+
   const { data: subs, error } = await getSupabase()
     .from('push_subscriptions')
     .select('endpoint, p256dh, auth') as {
