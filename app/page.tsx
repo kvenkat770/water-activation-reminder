@@ -58,7 +58,10 @@ export default function Home() {
         body: JSON.stringify(sub),
       });
 
-      if (!res.ok) throw new Error('Subscribe API failed');
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(`Subscribe API failed: ${body.detail ?? body.error ?? res.status}`);
+      }
 
       setStatus('subscribed');
       setMessage('');
