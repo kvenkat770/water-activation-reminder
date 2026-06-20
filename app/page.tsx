@@ -63,10 +63,10 @@ export default function Home() {
 
       setStatus('subscribed');
       setMessage('');
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       setStatus('error');
-      setMessage('Something went wrong. Try again.');
+      setMessage(`Error: ${err?.message ?? 'Unknown error'}`);
     }
   }
 
