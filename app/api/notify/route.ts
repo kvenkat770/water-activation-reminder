@@ -8,7 +8,7 @@ const VAPID_PUBLIC_KEY = 'BDcvlRyKUuzzJBXN8AsIpJOCPT_1dZtQ9qayHzWrf0ADBUSihCaNwR
 export async function POST(req: NextRequest) {
   try {
     webpush.setVapidDetails(
-      process.env.VAPID_EMAIL!,
+      'mailto:kumarvenkat770@gmail.com',
       VAPID_PUBLIC_KEY,
       process.env.VAPID_PRIVATE_KEY!
     );
